@@ -58,13 +58,13 @@ while True:
     print("Calculating total time... {0:.2f} (Run #{1})".format(total_time, run_count))
 
     # Changes link to get next page, or stops if complete
-    if info["pagination"]["size"] < 20:
-        break
-    else:
-        for x in info["pagination"]["links"]:
-            if x["rel"] == "next":
-                link = x["uri"]
-                break
+    found_next_link = False
+    for x in info["pagination"]["links"]:
+        if x["rel"] == "next":
+            found_next_link = True
+            link = x["uri"]
+            break
+    if not found_next_link: break
 
     sleep(0.3)
 
